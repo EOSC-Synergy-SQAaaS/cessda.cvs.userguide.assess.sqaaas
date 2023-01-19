@@ -1,0 +1,60 @@
+config:
+  credentials: []
+  project_repos:
+    bitbucket.org/cessda/cessda.cvs.userguide:
+      branch: master
+      repo: https://bitbucket.org/cessda/cessda.cvs.userguide
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.7
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      bitbucket.org/cessda/cessda.cvs.userguide git:
+        commands:
+        - /usr/bin/env sh .sqa/script.beady-red-frog.sh
+        container: qc.acc_homey-yellow-goat
+  QC.Doc:
+    repos:
+      bitbucket.org/cessda/cessda.cvs.userguide find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.silly-cornflower-ray.sh
+        container: qc.doc_scaly-plum-bulldog
+      bitbucket.org/cessda/cessda.cvs.userguide git:
+        commands:
+        - /usr/bin/env sh .sqa/script.snippy-silver-slug.sh
+        container: qc.doc_wheezy-cinnabar-impala
+      bitbucket.org/cessda/cessda.cvs.userguide markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.blurry-zucchini-squirt.sh
+        container: qc.doc_smelly-persimmon-woodlouse
+      bitbucket.org/cessda/cessda.cvs.userguide restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.hazy-puce-zonkey.sh
+        container: qc.doc_clammy-maroon-jackal
+  QC.Lic:
+    repos:
+      bitbucket.org/cessda/cessda.cvs.userguide licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.trippy-olive-hamster.sh
+        container: qc.lic_flabby-rose-coyote
+  QC.Sty:
+    repos:
+      bitbucket.org/cessda/cessda.cvs.userguide jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.grumpy-mustard-raccoon.sh
+        container: qc.sty_seedy-brass-ladybird
+      bitbucket.org/cessda/cessda.cvs.userguide rubocop:
+        commands:
+        - /usr/bin/env sh .sqa/script.cozy-peach-otter.sh
+        container: qc.sty_sickly-turquoise-urchin
+  QC.Ver:
+    repos:
+      bitbucket.org/cessda/cessda.cvs.userguide get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.sickly-vermilion-bear.sh
+        container: qc.ver_scanty-lilac-cuttlefish
+timeout: 5400
